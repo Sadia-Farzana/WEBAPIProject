@@ -19,10 +19,10 @@ namespace WEBAPI
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-
             );
-            EnableCorsAttribute cros = new EnableCorsAttribute();
-            config.EnableCors((ICorsPolicyProvider)cros);
+
+            //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(cors);
         }
 
     }
