@@ -20,7 +20,7 @@ namespace WEBAPI
                 TokenEndpointPath = new PathString("/token"),
 
                 //Setting the Token Expired Time (24 hours)  
-                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(10),
+                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(300),
 
                 //AuthorizationServerProvider class will validate the user credentials  
                 Provider = new AuthorizationServerProvider()

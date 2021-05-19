@@ -30,6 +30,12 @@ namespace WEBAPI.Controllers
             return Ok(signup);
         }
 
+        [Route("GetAll")]
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            return Ok(signuprepo.GetAll());
+        }
 
         [AllowAnonymous]
         [Route("Signup")]

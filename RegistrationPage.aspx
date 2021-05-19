@@ -51,10 +51,21 @@
 
 
 <body>
-
-
+    <div class="container">
+    
 
     <div class="card bg-light">
+        <div class="row">
+		<div class="col-md-3 ">
+		     <div class="list-group ">
+              <a href="#" class="list-group-item list-group-item-action">Personal Information</a>
+              <a href="UserList.aspx" class="list-group-item list-group-item-action">Userlist</a>
+              <a href="#" class="list-group-item list-group-item-action">Attendance</a>
+              <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
+              <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action active">User Registration</a>
+             
+            </div> 
+		</div>
         <article class="card-body mx-auto" style="max-width: 400px;">
             <h4 class="card-title mt-3 text-center">Create Account</h4>
             <p class="text-center"></p>
@@ -118,7 +129,7 @@
 
     <br>
     <br>
-    
+    </div>
 </body>
 <script src="Scripts/jquery-3.6.0.js"></script>
 <script src="Scripts/jquery-3.6.0.min.js"></script>

@@ -11,18 +11,56 @@
    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <style>
+        .divider-text {
+            position: relative;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+            .divider-text span {
+                padding: 7px;
+                font-size: 12px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .divider-text:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                border-bottom: 1px solid #ddd;
+                top: 55%;
+                left: 0;
+                z-index: 1;
+            }
+
+        .btn-facebook {
+            background-color: #405D9D;
+            color: #fff;
+        }
+
+        .btn-twitter {
+            background-color: #42AEEC;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <form>
+        <br />
+        <br />
         <div class="container">
+            <div class="card bg-light">
 	<div class="row">
 		<div class="col-md-3 ">
 		     <div class="list-group ">
-              <a href="#" class="list-group-item list-group-item-action active">Personal Information</a>
-              <a href="#" class="list-group-item list-group-item-action">Userlist</a>
+              <a href="Profile.aspx" class="list-group-item list-group-item-action active">Personal Information</a>
+              <a href="UserList.aspx" class="list-group-item list-group-item-action">Userlist</a>
               <a href="#" class="list-group-item list-group-item-action">Attendance</a>
               <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
-              <a href="#" class="list-group-item list-group-item-action">User Registration</a>
+              <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action">User Registration</a>
              
             </div> 
 		</div>
@@ -42,38 +80,38 @@
                               <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">Username</label> 
                                 <div class="col-8">
-                                  <input id="name" name="name" placeholder="Username" class="form-control here" type="text">
+                                  <input  id="username" class="form-control here" type="text" readonly="readonly" >
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="lastname" class="col-4 col-form-label">Email</label> 
                                 <div class="col-8">
-                                  <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">
+                                  <input id="email" name="lastname"  class="form-control here" type="text" readonly="readonly">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Password</label> 
                                 <div class="col-8">
-                                  <input id="text" name="text" placeholder="Nick Name" class="form-control here" required="required" type="text">
+                                  <input id="password"  class="form-control here" required="required" type="text" readonly="readonly">
                                 </div>
                               </div>
                            
                               <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Contact Number</label> 
                                 <div class="col-8">
-                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
+                                  <input id="phone"  class="form-control here" required="required" type="text" readonly="readonly">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="website" class="col-4 col-form-label">Address</label> 
                                 <div class="col-8">
-                                  <input id="website" name="website" placeholder="website" class="form-control here" type="text">
+                                  <input id="address"  class="form-control here" type="text" readonly="readonly">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="publicinfo" class="col-4 col-form-label">Role</label> 
                                 <div class="col-8">
-                                  <input id="role" name="website" placeholder="website" class="form-control here" type="text">
+                                  <input id="role"  class="form-control here" type="text" readonly="readonly">
                                 </div>
                               </div>
                              
@@ -107,11 +145,16 @@
                     </div>
                 </div>
             </div>
+        <div id="Errordiv" class="alert alert-danger collapse">
+                <a id="linkclose" class="close" href="#">&times;</a>
+                <div id="diverrortext"></div>
+            </div>
+        </div>
     </form>
 
 </body>
 </html>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
 <script src="Scripts/bootstrap.bundle.min.js"></script>
 <script src="Scripts/bootstrap.bundle.js"></script>
 
@@ -124,28 +167,48 @@
 
             window.location.href = "LoginPage.aspx";
         });
+       
         $.ajax({
             url: 'api/Registration/post/1',
             method: 'GET',
-
+            
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
                 'Content-Type': 'application/json'
             },
 
+            success: function (data) {
+                
+                //$.each(data, function (index, value) {
+
+                //    var StrUsername = $(value.StrUsername);
+                //    var StrEmail = $(value.StrUsername);
+                //    var StrPassword = $(value.StrUsername);
+                //    var StrContactNumber = $(value.StrUsername);
+                //    var StrAddress = $(value.StrUsername);
+                //    var StrType = $(value.StrUsername);
+
+                //    $('#username').val(StrUsername);
+                //    $('#email').val(StrEmail);
+                //    $('#password').val(StrPassword);
+                //    $('#phone').val(StrContactNumber);
+                //    $('#address').val(StrAddress);
+                //    $('#role').val(StrType);
+
+                //});
+
+                $('#username').val(data[0].StrUsername);
+                console.log(data);
+            },
             //complete: function (xmlHttp, status) {
             //    if (xmlHttp.status == 200) {
             //        $('#diverrortext').text(xmlHttp.responseText);
             //        $('#Errordiv').show('fade');
 
             //    }
+            //},
 
-            complete: function (xmlHttp, status, data) {
-                if (xmlHttp.status == 200) {
-                    $("#name").html(responseText),
-                        $("#role").html(responseText)
-                }
-            },
+           
             error: function (jqXHR) {
                 if (jqXHR.status == "401") {
                     $('#ErrorModal').modal('show');
