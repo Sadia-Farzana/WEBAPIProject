@@ -19,8 +19,8 @@ namespace WEBAPI.Controllers
 
 
 
-        [Route("{id}", Name = "GetById")]
-        public IHttpActionResult Get(int id)
+        [Route("GetById/{id}", Name = "GetById")]
+        public IHttpActionResult GetById(int id)
         {
             Models.Registration signup = signuprepo.GetById(id);
             if (signup == null)
@@ -52,16 +52,10 @@ namespace WEBAPI.Controllers
         [Authorize]
         //[HttpPost]
         [HttpGet]
-        [Route("post/{id}")]
+        [Route("Get/{id}")]
         public IHttpActionResult Post(int id)
         {
-            //Signup signup = signuprepo.GetById(id);
-            // var identity = (ClaimsIdentity)User.Identity;
-            ////var roles = identity.Claims
-            //            .Where(c => c.Type == ClaimTypes.Role)
-            //            .Select(c => c.Value);
-
-            //myclass.Role = string.Join("", roles.ToList());
+            
 
             Models.Registration signup = signuprepo.GetById(id);
             if (signup == null)
@@ -69,6 +63,28 @@ namespace WEBAPI.Controllers
                 return StatusCode(HttpStatusCode.NoContent);
             }
             return Ok(signup);
+        }
+
+        
+        [Route("edit/{id}")]
+        [HttpPut]
+        public IHttpActionResult Put([FromBody] Models.Registration sign, [FromUri] int id)
+        {
+            sign.IntId = id;
+            signuprepo.Edit(sign);
+            if (sign == null)
+            {
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            return Ok(sign);
+        }
+
+
+        [Route("delete/{id}")]
+        public IHttpActionResult Delete(int id)
+        {
+            signuprepo.Delete(id);
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

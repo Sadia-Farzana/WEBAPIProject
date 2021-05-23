@@ -13,5 +13,7 @@ namespace WebAPIwithToken.Repositories
         List<T> GetAll();
         T GetById(int id);
         void Signup(T signup);
+        void Delete(int id);
+        void Edit(T entity);
     }
 }

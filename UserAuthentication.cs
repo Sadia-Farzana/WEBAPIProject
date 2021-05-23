@@ -20,6 +20,7 @@ namespace WEBAPI
             using (WebAPIEntities dataobj = new WebAPIEntities())
             {
                 return dataobj.Registrations.Any(x => x.StrUsername.Equals(username, StringComparison.OrdinalIgnoreCase) && x.StrPassword == password);
+                
             }
         }
 

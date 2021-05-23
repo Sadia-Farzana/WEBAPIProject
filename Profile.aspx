@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -80,44 +78,44 @@
                               <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">Username</label> 
                                 <div class="col-8">
-                                  <input  id="username" class="form-control here" type="text" readonly="readonly" >
+                                      <h4 id="username" class="form-control here"></h4>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="lastname" class="col-4 col-form-label">Email</label> 
                                 <div class="col-8">
-                                  <input id="email" name="lastname"  class="form-control here" type="text" readonly="readonly">
+                                  <h4 id="email" class="form-control here"></h4>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Password</label> 
                                 <div class="col-8">
-                                  <input id="password"  class="form-control here" required="required" type="text" readonly="readonly">
+                                   <h4 id="password" class="form-control here"></h4>
                                 </div>
                               </div>
                            
                               <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Contact Number</label> 
                                 <div class="col-8">
-                                  <input id="phone"  class="form-control here" required="required" type="text" readonly="readonly">
+                                  <h4 id="phone" class="form-control here"></h4>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="website" class="col-4 col-form-label">Address</label> 
                                 <div class="col-8">
-                                  <input id="address"  class="form-control here" type="text" readonly="readonly">
+                                  <h4 id="address" class="form-control here"></h4>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="publicinfo" class="col-4 col-form-label">Role</label> 
                                 <div class="col-8">
-                                  <input id="role"  class="form-control here" type="text" readonly="readonly">
+                                  <h4 id="role" class="form-control here"></h4>
                                 </div>
                               </div>
                              
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                  <button id="btnupdatefromtbl" class="btn btn-primary" data-target="#ErrorModal" data-toggle="modal">Update My Profile</button>
                                 </div>
                               </div>
                             
@@ -158,6 +156,7 @@
 <script src="Scripts/bootstrap.bundle.min.js"></script>
 <script src="Scripts/bootstrap.bundle.js"></script>
 
+
 <script type="text/javascript">
     $(document).ready(function () {
         if (sessionStorage.getItem('accessToken') == null) {
@@ -167,9 +166,12 @@
 
             window.location.href = "LoginPage.aspx";
         });
+
        
+
+      
         $.ajax({
-            url: 'api/Registration/post/1',
+            url: 'api/Registration/Get/1',
             method: 'GET',
             
             headers: {
@@ -178,27 +180,16 @@
             },
 
             success: function (data) {
-                
-                //$.each(data, function (index, value) {
+                //data = JSON.parse(data);
+                $('#username').text(data.StrUsername);
+                $('#email').text(data.StrEmail);
+                $('#password').text(data.StrPassword);
+                $('#phone').text(data.StrContactNumber);
+                $('#address').text(data.StrAddress);
+                $('#role').text(data.StrType);
 
-                //    var StrUsername = $(value.StrUsername);
-                //    var StrEmail = $(value.StrUsername);
-                //    var StrPassword = $(value.StrUsername);
-                //    var StrContactNumber = $(value.StrUsername);
-                //    var StrAddress = $(value.StrUsername);
-                //    var StrType = $(value.StrUsername);
-
-                //    $('#username').val(StrUsername);
-                //    $('#email').val(StrEmail);
-                //    $('#password').val(StrPassword);
-                //    $('#phone').val(StrContactNumber);
-                //    $('#address').val(StrAddress);
-                //    $('#role').val(StrType);
-
-                //});
-
-                $('#username').val(data[0].StrUsername);
-                console.log(data);
+            
+               
             },
             //complete: function (xmlHttp, status) {
             //    if (xmlHttp.status == 200) {

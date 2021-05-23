@@ -5,14 +5,10 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-  
-   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<head> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <style>
         .divider-text {
             position: relative;
@@ -59,7 +55,7 @@
 		<div class="col-md-3 ">
 		     <div class="list-group ">
               <a href="Profile.aspx" class="list-group-item list-group-item-action">Personal Information</a>
-              <a href="UserList.aspx" class="list-group-item list-group-item-action active">Userlist</a>
+              <a href="UserList.cshtml" class="list-group-item list-group-item-action active">Userlist</a>
               <a href="#" class="list-group-item list-group-item-action">Attendance</a>
               <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
               <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action">User Registration</a>
@@ -71,7 +67,7 @@
 		        <div class="card-body">
 		            <div class="row">
 		                <div class="col-md-12">
-		                    <h4>User list</h4>
+		                    <h4 style="font-weight:bold"> User list</h4>
 		                    <hr>
 		                </div>
 		            </div>
@@ -89,8 +85,10 @@
                                        <th>Contact Number</th>
                                        <th>Address</th>
                                        <th>Role</th>
-                                       <th>Action</th>
-                                       <th>Action</th>
+                                       <th><button  data-toggle="modal" data-target="#ErrorModal">te</button></th>
+                                       <th>Delete</th>
+                                      
+
                                    </tr>
                                </thead>
                                <tbody id="tblbody">
@@ -104,6 +102,26 @@
 		</div>
 	</div>
 </div>
+        <div class="modal fade" tabindex="-1" id="editmodal" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                             <h4 class="modal-title">Update User</h4>
+                            <Button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                            </Button>
+                           
+                        </div>
+                        <div class="modal-body">
+                              <div class="row">
+                                    <h1>test</h1>
+                      </div>
+                </div>
+            </div>
+          </div>
+            </div>
+
+
         <div class="modal fade" tabindex="-1" id="ErrorModal" data-keyboard="false" data-backdrop="static">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -130,12 +148,11 @@
 </body>
 </html>
 
-<script src="Scripts/bootstrap.bundle.min.js"></script>
-<script src="Scripts/bootstrap.bundle.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
-
+   
+       
 
         $.ajax({
             url: 'api/Registration/GetAll',
@@ -149,31 +166,25 @@
             success: function (data) {
 
                 $.each(data, function (index, value) {
-
+                    var id = value.IntId
                     var row = $('<tr><td>' + value.IntId + '</td><td>'
                         + value.StrUsername + '</td><td>'
                         + value.StrEmail + '</td><td>'
                         + value.StrPassword + '</td><td>'
                         + value.StrContactNumber + '</td><td>'
                         + value.StrAddress + '</td><td>'
-                        + value.StrType + '</td><td> Update  </td></td> </td><td> Delete  </td></td>');
+                        + value.StrType + '</td><td>' + '<button id="btnupdatefromtbl"  class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>'+
+                        '</td><td>' + '<a href="Delete?' + value.IntId +'" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span></a>'+'</td><td>');
 
                     $('#tbluserlist').append(row);
 
+                   
                 });
 
-
+              
 
             },
-            //complete: function (xmlHttp, status) {
-            //    if (xmlHttp.status == 200) {
-            //        $('#diverrortext').text(xmlHttp.responseText);
-            //        $('#Errordiv').show('fade');
-
-            //    }
-            //},
-
-
+          
             error : function(jqXHR) {
                 if (jqXHR.status == "401") {
                     $('#ErrorModal').modal('show');
@@ -183,6 +194,10 @@
                     $('#Errordiv').show('fade');
                 }
             },
+        });
+
+        $("#btnupdatefromtbl").click(function () {
+            $("#editmodal").modal();
         });
 
     });

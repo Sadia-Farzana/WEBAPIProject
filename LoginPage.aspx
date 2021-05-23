@@ -77,31 +77,36 @@
 <script src="Scripts/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            //var id = @Request.id
+            //$.get("api/Registration/GetById/", { id: id }, function (data) {
 
-            $('#btnlogin').click(function () {
-                $.ajax({
-                    url: '/token',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: {
 
-                        username: $('#txtusername').val(),
-                        password: $('#txtpassword').val(),
-                        grant_type: 'password'
-                    },
-                    success: function (response) {
-                        sessionStorage.setItem('accessToken', response.access_token);
-                        window.location.href = "Profile.aspx";
-                        //$('#diverrortext').text(JSON.stringify(response));
-                        //$('#Errordiv').show('fade');
-                    },
-                    error: function (jqXHR) {
-                        $('#diverrortext').text(jqXHR.responseText);
-                        $('#Errordiv').show('fade');
+                $('#btnlogin').click(function () {
+                    $.ajax({
+                        url: '/token',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: {
 
-                    }
+                            username: $('#txtusername').val(),
+                            password: $('#txtpassword').val(),
+                            grant_type: 'password',
+                          
+                        },
+                        success: function (response) {
+                            sessionStorage.setItem('accessToken', response.access_token);
+                            window.location.href = "Profile.aspx";
+                            //$('#diverrortext').text(JSON.stringify(response));
+                            //$('#Errordiv').show('fade');
+                        },
+                        error: function (jqXHR) {
+                            $('#diverrortext').text(jqXHR.responseText);
+                            $('#Errordiv').show('fade');
+
+                        }
+                    });
                 });
-            });
+            
         });
     </script>
 </html>

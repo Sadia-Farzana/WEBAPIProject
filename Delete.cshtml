@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="modal fade" tabindex="-1" id="ErrorModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Token expired</h4>
+                    <Button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </Button>
+
+                </div>
+                <div class="modal-body">
+                    <h2>Session Time out.Please Login again.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="Scripts/bootstrap.bundle.min.js"></script>
+<script src="Scripts/bootstrap.bundle.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var id = @Request.QueryString["id"] 
+            $.get("api/Registration/GetById/", 
+                { id: id }, function (data) {
+
+                $.ajax({
+                    url: 'api/Registration/delete/' + id,
+                    method: 'DELETE',
+                    success: function (jqXHR, status) {
+                        if (jqXHR.status == "204") {
+                            $('#ErrorModal').modal('show');
+                        }
+
+                    }
+                });
+            });
+    });
+</script>

@@ -293,6 +293,8 @@
       <LastGenOutput>WebAPI.cs</LastGenOutput>
     </Content>
     <Content Include="Profile.aspx" />
+    <Content Include="InformationUpdate.cshtml" />
+    <None Include="UserList.cshtml" />
     <Content Include="RegistrationPage.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -324,6 +326,8 @@
     <Content Include="Models\WebAPI.edmx.diagram">
       <DependentUpon>WebAPI.edmx</DependentUpon>
     </Content>
+    <Content Include="Profile.cshtml" />
+    <Content Include="Delete.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -421,9 +425,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="update_user.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Frontend\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

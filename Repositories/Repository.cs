@@ -32,5 +32,17 @@ namespace WebAPIwithToken.Repositories
             context.Set<T>().Add(signup);
             context.SaveChanges();
         }
+        public void Delete(int id)
+        {
+            context.Set<T>().Remove(GetById(id));
+            context.SaveChanges();
+        }
+
+        public void Edit(T entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+
     }
 }

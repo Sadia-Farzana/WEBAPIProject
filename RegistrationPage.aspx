@@ -135,19 +135,23 @@
 <script src="Scripts/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-       
+
+            //if (strusername.val == "" || StrEmail.val == "" || StrPassword.val == "" || StrContactNumber.val == "" || StrAddress.val == "" || StrType.val == "")
             $('#btnsignup').click(function () {
                 $.ajax({
                     url: 'api/Registration/Signup',
                     method: 'POST',
                     data: {
-                       
+
                         strusername: $('#txtusername').val(),
                         StrEmail: $('#txtemail').val(),
                         StrPassword: $('#txtpassword').val(),
                         StrContactNumber: $('#txtphone').val(),
                         StrAddress: $('#txtaddress').val(),
                         StrType: $('#txtrole').val(),
+
+                       
+
                     },
                     complete: function (xmlHttp, status) {
                         if (xmlHttp.status == 201) {
