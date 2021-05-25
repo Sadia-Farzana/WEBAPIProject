@@ -60,6 +60,7 @@
               <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
               <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action">User Registration</a>
              
+             
             </div> 
 		</div>
 		<div class="col-md-9">
@@ -68,6 +69,7 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                    <h4>Personal Information</h4>
+                           <div  class="float-lg-right" > <button id="btnlogout" class="btn btn-danger">Logout</button></div>
 		                    <hr>
 		                </div>
 		            </div>
@@ -112,10 +114,10 @@
                                   <h4 id="role" class="form-control here"></h4>
                                 </div>
                               </div>
-                             
+                             <input type="hidden" id="IntId" />
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <a href="update_user.cshtml" class="btn btn-primary">Update My Profile</a>
+                                  <Button onclick="UpdateUser(IntId)" class="btn btn-primary">Update My Profile</Button>
                                 </div>
                               </div>
                             
@@ -167,11 +169,14 @@
             window.location.href = "LoginPage.aspx";
         });
 
-       
+        $('#btnlogout').click(function () {
+            sessionStorage.removeItem('accessToken');
+            window.location.href = "LoginPage.aspx";
+        });
 
       
         $.ajax({
-            url: 'api/Registration/Get/1',
+            url: 'api/Registration/Login',
             method: 'GET',
             
             headers: {
@@ -181,6 +186,7 @@
 
             success: function (data) {
                 //data = JSON.parse(data);
+                $('#IntId').text(data.IntId);
                 $('#username').text(data.StrUsername);
                 $('#email').text(data.StrEmail);
                 $('#password').text(data.StrPassword);

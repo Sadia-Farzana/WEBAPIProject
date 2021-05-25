@@ -56,11 +56,12 @@ namespace WEBAPI.Controllers
         [Route("Login")]
         public IHttpActionResult Login(Models.Registration signup)
         {
-
             var identity = (ClaimsIdentity)User.Identity;
+            string username = identity.Name;
+            //signup.StrUsername = identity.Name;
+            //signup = signuprepo.GetByUsername(username);
 
-            signup.StrUsername = identity.Name;
-            signup = signuprepo.GetByUsername(signup.StrUsername);
+            signup = dataobj.Registrations.Where(x => x.StrUsername == identity.Name).FirstOrDefault();
             return Ok(signup);
         }
 

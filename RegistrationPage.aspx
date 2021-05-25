@@ -50,7 +50,7 @@
 
 
 
-<body>
+<body oncontextmenu="return false">
     <div class="container">
     
 
@@ -58,15 +58,17 @@
         <div class="row">
 		<div class="col-md-3 ">
 		     <div class="list-group ">
-              <a href="#" class="list-group-item list-group-item-action">Personal Information</a>
-              <a href="UserList.aspx" class="list-group-item list-group-item-action">Userlist</a>
+              <a href="Profile.aspx" class="list-group-item list-group-item-action">Personal Information</a>
+              <a href="UserList.cshtml" class="list-group-item list-group-item-action">Userlist</a>
               <a href="#" class="list-group-item list-group-item-action">Attendance</a>
               <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
               <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action active">User Registration</a>
              
             </div> 
 		</div>
+             
         <article class="card-body mx-auto" style="max-width: 400px;">
+            <div  class="float-right" > <button id="btnlogout" class="btn btn-danger">Logout</button></div>
             <h4 class="card-title mt-3 text-center">Create Account</h4>
             <p class="text-center"></p>
          
@@ -113,7 +115,7 @@
                         <input class="form-control" id="txtaddress" placeholder="Address" type="text">
                     </div> <!-- form-group// -->
                     <div class="form-group">
-                        <button type="submit" id="btnsignup" class="btn btn-primary btn-block"> Create Account  </button>
+                        <button type="submit" id="btnsignup" class="btn btn-primary btn-block"> Register an User  </button>
                     </div> <!-- form-group// --> 
                 
             <p class="text-center" id="suucessmsg" ></p>
@@ -135,12 +137,27 @@
 <script src="Scripts/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            if (sessionStorage.getItem('accessToken') == null) {
+                window.location.href = "LoginPage.aspx";
+            }
+            $('#ErrorModal').on('hidden.bs.modal', function () {
+
+                window.location.href = "LoginPage.aspx";
+            });
+            $('#btnlogout').click(function () {
+                sessionStorage.removeItem('accessToken');
+                window.location.href = "LoginPage.aspx";
+            });
 
             //if (strusername.val == "" || StrEmail.val == "" || StrPassword.val == "" || StrContactNumber.val == "" || StrAddress.val == "" || StrType.val == "")
             $('#btnsignup').click(function () {
                 $.ajax({
                     url: 'api/Registration/Signup',
                     method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
+                        'Content-Type': 'application/json'
+                    },
                     data: {
 
                         strusername: $('#txtusername').val(),
