@@ -61,7 +61,7 @@
                     <div class="col-md-3 ">
                         <div class="list-group ">
                             <a href="Profile.aspx" class="list-group-item list-group-item-action active">Personal Information</a>
-                            <a href="UserList.aspx" class="list-group-item list-group-item-action">Userlist</a>
+                            <a href="~/UserList.cshtml" class="list-group-item list-group-item-action">Userlist</a>
                             <a href="#" class="list-group-item list-group-item-action">Attendance</a>
                             <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
                             <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action">User Registration</a>
@@ -172,7 +172,7 @@
       
             $('#btnupdate').click(function () {
                 $.ajax({
-                    url: 'api/Registration/edit/4' /*+ id*/,
+                    url: 'api/Registration/edit/1' /*+ id*/,
                     method: 'PUT', 
                  
                     headers: {

@@ -55,7 +55,7 @@
 		<div class="col-md-3 ">
 		     <div class="list-group ">
               <a href="Profile.aspx" class="list-group-item list-group-item-action active">Personal Information</a>
-              <a href="UserList.aspx" class="list-group-item list-group-item-action">Userlist</a>
+              <a href="UserList.cshtml" class="list-group-item list-group-item-action">Userlist</a>
               <a href="#" class="list-group-item list-group-item-action">Attendance</a>
               <a href="#" class="list-group-item list-group-item-action">Overall Attendance Report</a>
               <a href="RegistrationPage.aspx" class="list-group-item list-group-item-action">User Registration</a>
@@ -115,7 +115,7 @@
                              
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <button id="btnupdatefromtbl" class="btn btn-primary" data-target="#ErrorModal" data-toggle="modal">Update My Profile</button>
+                                  <a href="update_user.cshtml" class="btn btn-primary">Update My Profile</a>
                                 </div>
                               </div>
                             

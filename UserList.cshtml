@@ -160,13 +160,19 @@
                                     </div>
                                 </div>
 
+                                <div id="SuccessDive" class="alert-success">
+                                    <a id="linkclose" class="close" href="#">&times;</a>
+                                    <div id="suc"></div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </div>
+            
+        
 
 
         <div class="modal fade" tabindex="-1" id="ErrorModal" data-keyboard="false" data-backdrop="static">
@@ -195,97 +201,142 @@
 </body>
 </html>
 
-
+<button></button>
 <script type="text/javascript">
-    $(document).ready(function () {
-       
+    function DeleteUser(IntId) {
         $.ajax({
-            url: 'api/Registration/GetAll',
-            method: 'GET',
-
-            headers: {
-                'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
-                'Content-Type': 'application/json'
-            },
-
+            url: 'api/Registration/delete/' + IntId,
+            method: 'DELETE',
             success: function (data) {
-
-                $.each(data, function (index, value) {
-
-                    var row = $('<tr><td>' + value.IntId + '</td><td>'
-                        + value.StrUsername + '</td><td>'
-                        + value.StrEmail + '</td><td>'
-                        + value.StrPassword + '</td><td>'
-                        + value.StrContactNumber + '</td><td>'
-                        + value.StrAddress + '</td><td>'
-                        + value.StrType + '</td><td>' + '<button id="btnupdatefromtbl"  class="btn btn-info"><span class="glyphicon glyphicon-edit"></button>' +
-                        '</td><td>' + '<a href="Delete?' + value.IntId + '" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span></a>' + '</td><td>');
-
-                    $('#tbluserlist').append(row);
-                });
-
-              
-                $("#btnupdate").click(function () {
-                    edit();
-                });
-
-
-                $("#btnupdatefromtbl").click(function () {
-                    $("#editmodal").modal();
-                });
-                function edit() {
-                   
-                        $.ajax({
-                            url: 'api/Registration/edit' + IntId,
-                        method: 'PUT',
-
-                        headers: {
-                            'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
-                            'Content-Type': 'application/json'
-                        },
-
-                        data: {
-
-                            StrUsername: $('#username').val(),
-                            StrEmail: $('#email').val(),
-                            StrPassword: $('#password').val(),
-                            StrContactNumber: $('#phone').val(),
-                            StrAddress: $('#address').val(),
-                            StrType: $('#role').val(),
-                        },
-
-                        success: function (xmlHttp, status) {
-                            if (xmlHttp.status == 200) {
-                                $('#diverrortext').text("Edited");
-                                $('#Errordiv').show('fade');
-
-                            }
-                        },
-
-
-                        error: function (jqXHR) {
-
-                            $('#diverrortext').text(jqXHR.responseText);
-                            $('#Errordiv').show('fade');
-
-                        }
-                    });
-                }
-
-
-                
+                $('#diverrortext').text("Deleted");
+                $('#Errordiv').show('fade');
+                Userlist();
             }
 
         });
 
+    }
+    function Edit(IntId) {
+
+        $("#editmodal").modal('show');
+
+        
+            $('#btnupdate').click(function () {
+                $.ajax({
+                    url: 'api/Registration/edit/' + IntId,
+                    method: 'PUT',
+
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
+
+                    },
+
+                    data: {
+
+                        StrUsername: $('#username').val(),
+                        StrEmail: $('#email').val(),
+                        StrPassword: $('#password').val(),
+                        StrContactNumber: $('#phone').val(),
+                        StrAddress: $('#address').val(),
+                        StrType: $('#role').val(),
+                    },
+
+                    success: function (data) {
+
+                        $('#suc').text("Successfully Edited");
+                        $('#SuccessDive').show('fade');
+                        Userlist();
 
 
-    
-
-      
+                    },
 
 
+                    error: function (jqXHR) {
+
+                        $('#diverrortext').text(jqXHR.responseText);
+                        $('#Errordiv').show('fade');
+
+                    }
+                });
+            });          
+
+      }
+  
 
 
+    $("#btnupdatefromtbl").click(function () {
+        
     });
+
+    $(document).ready(function () {
+
+        if (sessionStorage.getItem('accessToken') == null) {
+            window.location.href = "LoginPage.aspx";
+        }
+        $('#ErrorModal').on('hidden.bs.modal', function () {
+
+            window.location.href = "LoginPage.aspx";
+        });
+        Userlist();
+
+        $("#delete").click(function () {
+            DeleteUser();
+        });
+
+        
+        
+
+
+         function Userlist() {
+            $.ajax({
+                url: 'api/Registration/GetAll',
+                method: 'GET',
+
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
+                    'Content-Type': 'application/json'
+                },
+
+                success: function (data) {
+
+                    $.each(data, function (index, value) {
+
+                        var row = $('<tr><td>' + value.IntId + '</td><td>'
+                            + value.StrUsername + '</td><td>'
+                            + value.StrEmail + '</td><td>'
+                            + value.StrPassword + '</td><td>'
+                            + value.StrContactNumber + '</td><td>'
+                            + value.StrAddress + '</td><td>'
+                            + value.StrType + '</td><td>' + '<button id="btnupdatefromtbl"  onclick="Edit(' + value.IntId + ')" class="btn btn-info"><span class="glyphicon glyphicon-edit"></button>' +
+                            '</td><td>' + '<button onclick="DeleteUser(' + value.IntId + ')" id="delete" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span></button>' + '</td><td>');
+
+                        $('#tbluserlist').append(row);
+                        
+                    });
+                   
+
+                    
+
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status == "401") {
+                        $('#ErrorModal').modal('show');
+                    }
+                    else {
+                        $('#diverrortext').text(jqXHR.responseText);
+                        $('#Errordiv').show('fade');
+                    }
+                },
+            });
+        }
+  
+           
+         
+        
+
+
+       
+    });
+
 </script>
+

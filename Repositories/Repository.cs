@@ -27,6 +27,11 @@ namespace WebAPIwithToken.Repositories
             return context.Set<T>().Find(id);
         }
 
+        public T GetByUsername(string username)
+        {
+            return context.Set<T>().Find(username);
+        }
+
         public void Signup(T signup)
         {
             context.Set<T>().Add(signup);

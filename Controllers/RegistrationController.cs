@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using WEBAPI.Models;
 using WebAPIwithToken.Repositories;
@@ -52,16 +53,14 @@ namespace WEBAPI.Controllers
         [Authorize]
         //[HttpPost]
         [HttpGet]
-        [Route("Get/{id}")]
-        public IHttpActionResult Post(int id)
+        [Route("Login")]
+        public IHttpActionResult Login(Models.Registration signup)
         {
-            
 
-            Models.Registration signup = signuprepo.GetById(id);
-            if (signup == null)
-            {
-                return StatusCode(HttpStatusCode.NoContent);
-            }
+            var identity = (ClaimsIdentity)User.Identity;
+
+            signup.StrUsername = identity.Name;
+            signup = signuprepo.GetByUsername(signup.StrUsername);
             return Ok(signup);
         }
 
