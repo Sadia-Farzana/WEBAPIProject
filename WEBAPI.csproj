@@ -198,11 +198,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LoginPage.aspx.cs">
+    <Compile Include="Frontend\LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoginPage.aspx.designer.cs">
+    <Compile Include="Frontend\LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Registration.cs">
@@ -223,19 +223,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WebAPI.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Profile.aspx.cs">
+    <Compile Include="Frontend\Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Profile.aspx.designer.cs">
+    <Compile Include="Frontend\Profile.aspx.designer.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationPage.aspx.cs">
+    <Compile Include="Frontend\RegistrationPage.aspx.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RegistrationPage.aspx.designer.cs">
+    <Compile Include="Frontend\RegistrationPage.aspx.designer.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\IRepository.cs" />
@@ -244,11 +244,11 @@
     <Compile Include="Repositories\SignupRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UserAuthentication.cs" />
-    <Compile Include="UserList.aspx.cs">
+    <Compile Include="Frontend\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserList.aspx.designer.cs">
+    <Compile Include="Frontend\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -281,7 +281,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="LoginPage.aspx" />
+    <Content Include="Frontend\LoginPage.aspx" />
     <Content Include="Models\WebAPI.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WebAPI.edmx</DependentUpon>
@@ -292,10 +292,10 @@
       <DependentUpon>WebAPI.edmx</DependentUpon>
       <LastGenOutput>WebAPI.cs</LastGenOutput>
     </Content>
-    <Content Include="Profile.aspx" />
+    <Content Include="Frontend\Profile.aspx" />
     <Content Include="InformationUpdate.cshtml" />
-    <None Include="UserList.cshtml" />
-    <Content Include="RegistrationPage.aspx" />
+    <Content Include="Frontend\AllUser.aspx" />
+    <Content Include="Frontend\RegistrationPage.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -326,7 +326,7 @@
     <Content Include="Models\WebAPI.edmx.diagram">
       <DependentUpon>WebAPI.edmx</DependentUpon>
     </Content>
-    <Content Include="Profile.cshtml" />
+    <Content Include="Frontend\Profile.cshtml" />
     <Content Include="Delete.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
@@ -405,7 +405,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="UserList.aspx" />
+    <Content Include="Frontend\UserList.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -425,11 +425,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="update_user.cshtml" />
+    <Content Include="Frontend\update_user.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Frontend\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

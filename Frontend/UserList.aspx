@@ -155,7 +155,7 @@
        
 
         $.ajax({
-            url: 'api/Registration/GetAll',
+            url: '../api/Registration/GetAll',
             method: 'GET',
 
             headers: {

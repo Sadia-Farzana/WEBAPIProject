@@ -3,6 +3,7 @@
 
 <html>
 <head>
+    <title>User List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -43,7 +44,7 @@
         }
     </style>
 </head>
-<body>
+<body ><%--oncontextmenu="return false">--%>
     <form>
         <br />
         <br />
@@ -89,7 +90,6 @@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
 
-
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" tabindex="-1" id="editmodal" data-keyboard="false" data-backdrop="static">
+        <div class="modal fade" tabindex="-2" id="editmodal" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -116,7 +116,6 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-
 
                                 <div class="form-group row">
                                     <label for="name" class="col-4 col-form-label">Username</label>
@@ -162,10 +161,7 @@
                                     </div>
                                 </div>
 
-                                <div id="SuccessDive" class="alert-success">
-                                    <a id="linkclose" class="close" href="#">&times;</a>
-                                    <div id="suc"></div>
-                                </div>
+                               
 
                             </div>
                         </div>
@@ -203,11 +199,11 @@
 </body>
 </html>
 
-<button></button>
+
 <script type="text/javascript">
     function DeleteUser(IntId) {
         $.ajax({
-            url: 'api/Registration/delete/' + IntId,
+            url: '../api/Registration/delete/' + IntId,
             method: 'DELETE',
             success: function (data) {
                 $('#diverrortext').text("Deleted");
@@ -225,7 +221,7 @@
         
             $('#btnupdate').click(function () {
                 $.ajax({
-                    url: 'api/Registration/edit/' + IntId,
+                    url: '../api/Registration/edit/' + IntId,
                     method: 'PUT',
 
                     headers: {
@@ -272,17 +268,17 @@
 
     $(document).ready(function () {
 
-        if (sessionStorage.getItem('accessToken') == null) {
-            window.location.href = "LoginPage.aspx";
-        }
-        $('#ErrorModal').on('hidden.bs.modal', function () {
+        //if (sessionStorage.getItem('accessToken') == null) {
+        //    window.location.href = "LoginPage.aspx";
+        //}
+        //$('#ErrorModal').on('hidden.bs.modal', function () {
 
-            window.location.href = "LoginPage.aspx";
-        });
-        $('#btnlogout').click(function () {
-            sessionStorage.removeItem('accessToken');
-            window.location.href = "LoginPage.aspx";
-        });
+        //    window.location.href = "LoginPage.aspx";
+        //});
+        //$('#btnlogout').click(function () {
+        //    sessionStorage.removeItem('accessToken');
+        //    window.location.href = "LoginPage.aspx";
+        //});
 
         Userlist();
 
@@ -296,7 +292,7 @@
 
          function Userlist() {
             $.ajax({
-                url: 'api/Registration/GetAll',
+                url: '../api/Registration/GetAll',
                 method: 'GET',
 
                 headers: {

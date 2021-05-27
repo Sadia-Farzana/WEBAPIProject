@@ -98,7 +98,7 @@
                         </div>
                         <select class="form-control" id="txtrole">
                             <option selected=""> Role</option>
-                            <option value="Super Admin">Super Admin</option>
+                            <option value="User">User</option>
                             <option value="Admin">Admin</option>
                         </select>
                     </div> <!-- form-group end.// -->
@@ -123,6 +123,23 @@
                 <a id="linkclose" class="close" href="#">&times;</a>
                 <div id="diverrortext"></div>
             </div>
+
+            <div class="modal fade" tabindex="-1" id="ErrorModal" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Token expired</h4>
+                        <Button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </Button>
+
+                    </div>
+                    <div class="modal-body">
+                        <h2>Session Time out.Please Login again.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
             <p class="text-center">Have an account? <a href="LoginPage.aspx">Log In</a> </p>
 
         </article>
